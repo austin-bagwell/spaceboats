@@ -3,9 +3,17 @@ import {
   SystemsApi,
   GetSystemWaypoints200ResponseToJSON,
   WaypointTrait,
+  GetShipyardRequest,
 } from "@spacejunk/airlock";
 
 const systems = new SystemsApi(config);
+
+export async function getShipsForSale(request: GetShipyardRequest) {
+  const { systemSymbol, waypointSymbol } = request;
+  const shipyard = (await systems.getShipyard(systemSymbol, waypointSymbol))
+    .data.shipTypes;
+  return shipyard;
+}
 
 export function getVisibleSystems() {
   systems
@@ -18,9 +26,8 @@ export async function seeWaypointsAtSystem(system: string) {}
 
 export async function getSystemWaypoints(system: string) {
   try {
-    const waypoints = await systems.getSystemWaypoints(system);
-    console.log(waypoints.data);
-    return GetSystemWaypoints200ResponseToJSON(waypoints).data;
+    const waypoints = (await systems.getSystemWaypoints(system)).data;
+    return waypoints;
   } catch (err) {
     console.log(err);
   }

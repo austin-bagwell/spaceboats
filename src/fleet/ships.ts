@@ -1,7 +1,30 @@
 import { config } from "../config";
-import { FleetApi, NavigateShipRequest } from "@spacejunk/airlock";
+import {
+  FleetApi,
+  NavigateShipRequest,
+  PurchaseShipRequest,
+} from "@spacejunk/airlock";
 
 const fleet = new FleetApi(config);
+
+export async function dockShip(ship: string) {
+  const res = (await fleet.dockShip(ship)).data;
+  return res;
+}
+
+export async function refuelShip(ship: string) {
+  const res = (await fleet.refuelShip(ship)).data;
+  return res;
+}
+
+export async function purchaseMiningDrone(waypoint: string) {
+  const request: PurchaseShipRequest = {
+    shipType: "SHIP_MINING_DRONE",
+    waypointSymbol: waypoint,
+  };
+  const res = (await fleet.purchaseShip(request)).data;
+  return res;
+}
 
 export async function myShips() {
   fleet
@@ -23,44 +46,30 @@ export async function getShipStatusReport(shipSymbol: string) {
 
   const {
     symbol,
+    registration: { role },
     nav: { waypointSymbol, status },
     cargo: { capacity: cargoCapacity, units },
     fuel: { current, capacity: fuelCapacity },
   } = ship;
 
-  const shipStatus = `ship ${symbol} 
-${status} at waypoint: ${waypointSymbol}
-cargo: ${units} units of ${cargoCapacity}
-fuel: ${current} units of ${fuelCapacity}
+  const transitStatus = status === "IN_TRANSIT" ? "to" : "at";
+  const shipStatus = `ship ${symbol} (${role})
+==> ${status} ${transitStatus} waypoint: ${waypointSymbol}
+==> cargo: ${units} units of ${cargoCapacity}
+==> fuel: ${current} units of ${fuelCapacity}
   `;
   return shipStatus;
 }
 
 export async function navigateShip(
   shipSymbol: string,
-  destination: NavigateShipRequest
+  waypointSymbol: NavigateShipRequest
 ) {
   try {
-    await fleet.navigateShip(shipSymbol, destination);
+    const res = (await fleet.navigateShip(shipSymbol, waypointSymbol)).data;
+    return res;
   } catch (err) {
     console.log("ya goofed. status:  ");
     console.log(err.response.status);
   }
-}
-
-export async function testNav() {
-  const frigateSymbol = "JITSUJAMMER-1";
-  const shipyardWaypoint: NavigateShipRequest = {
-    waypointSymbol: "X1-VS75-97637F",
-  };
-
-  const request = {
-    shipSymbol: frigateSymbol,
-    navigateShipRequest: shipyardWaypoint,
-  };
-
-  fleet
-    .navigateShipRaw(request)
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
 }
