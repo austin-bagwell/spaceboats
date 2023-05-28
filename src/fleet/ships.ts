@@ -17,6 +17,16 @@ export async function refuelShip(ship: string) {
   return res;
 }
 
+export async function orbitShip(ship: string) {
+  const res = (await fleet.orbitShip(ship)).data;
+  return res;
+}
+
+export async function extractResources(ship: string) {
+  const res = (await fleet.extractResources(ship)).data;
+  return res;
+}
+
 export async function purchaseMiningDrone(waypoint: string) {
   const request: PurchaseShipRequest = {
     shipType: "SHIP_MINING_DRONE",

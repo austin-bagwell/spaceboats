@@ -8,6 +8,8 @@ import {
   purchaseMiningDrone,
   dockShip,
   refuelShip,
+  extractResources,
+  orbitShip,
 } from "./fleet/ships";
 import {
   getVisibleSystems,
@@ -37,10 +39,11 @@ const shipyardReq = {
 // purchaseMiningDrone(shipyardWaypoint)
 //   .then((res) => console.log(res))
 //   .catch((err) => console.log(err));
-refuelShip(miningDrone)
+extractResources(miningDrone)
+  .then((res) => console.log(res))
   .then(() => getShipStatusReport(miningDrone))
   .then((res) => console.log(res))
-  .catch((err) => console.log(err));
+  .catch((err) => console.log(err.response));
 
 // myShips();
 // getVisibleSystems();
