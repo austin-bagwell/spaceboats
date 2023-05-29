@@ -10,6 +10,8 @@ import {
   refuelShip,
   extractResources,
   orbitShip,
+  getShipCargoHold,
+  sellAllGoods,
 } from "./fleet/ships";
 import {
   getVisibleSystems,
@@ -19,7 +21,7 @@ import {
   findWaypointWithShipyard,
   getShipsForSale,
 } from "./systems/systems";
-
+import { automine } from "./fleet/mining/automine";
 import { NavigateShipRequest } from "@spacejunk/airlock";
 import { error } from "console";
 
@@ -36,22 +38,6 @@ const shipyardReq = {
   waypointSymbol: shipyardWaypoint,
 };
 
-// purchaseMiningDrone(shipyardWaypoint)
-//   .then((res) => console.log(res))
-//   .catch((err) => console.log(err));
-extractResources(miningDrone)
-  .then((res) => console.log(res))
-  .then(() => getShipStatusReport(miningDrone))
-  .then((res) => console.log(res))
-  .catch((err) => console.log(err.response));
-
-// myShips();
-// getVisibleSystems();
-// getSystemWaypoints(hqSystem);
-// getWaypointsOfType(hqSystem, asteroidField);
-// getWaypointTraits(hqSystem);
-// findWaypointWithShipyard(hqSystem);
-// navigateShip(miningDrone, { waypointSymbol: asteroidFieldWaypoint })
-//   .then((res) => console.log(res))
-//   .catch((err) => console.log(err));
-// testNav();
+// getShipStatusReport(miningDrone).then((res) => console.log(res));
+// automine(miningDrone);
+// dockShip(miningDrone).then(() => sellAllGoods(miningDrone));

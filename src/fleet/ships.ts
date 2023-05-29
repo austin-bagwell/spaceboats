@@ -3,9 +3,35 @@ import {
   FleetApi,
   NavigateShipRequest,
   PurchaseShipRequest,
+  SellCargoRequest,
+  SellCargo201ResponseData,
 } from "@spacejunk/airlock";
 
 const fleet = new FleetApi(config);
+
+export async function sellOneGood(
+  ship: string,
+  cargo: SellCargoRequest
+): Promise<SellCargo201ResponseData> {
+  const sale = (await fleet.sellCargo(ship, cargo)).data;
+  return sale;
+}
+
+export async function sellAllGoods(ship: string) {
+  const { inventory } = (await fleet.getMyShipCargo(ship)).data;
+
+  for (let item of inventory) {
+    const { symbol, units } = item;
+    await sellOneGood(ship, { symbol, units });
+  }
+
+  return 0;
+}
+
+export async function getShipCargoHold(ship: string) {
+  const cargo = (await fleet.getMyShipCargo(ship)).data;
+  return cargo;
+}
 
 export async function dockShip(ship: string) {
   const res = (await fleet.dockShip(ship)).data;
