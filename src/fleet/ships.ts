@@ -22,7 +22,10 @@ export async function sellAllGoods(ship: string) {
 
   for (let item of inventory) {
     const { symbol, units } = item;
-    await sellOneGood(ship, { symbol, units });
+    const sale = await sellOneGood(ship, { symbol, units });
+    console.log(
+      `sold ${sale.transaction.units} ${sale.transaction.tradeSymbol} for ${sale.transaction.totalPrice} credits`
+    );
   }
 
   return 0;
@@ -77,7 +80,7 @@ export async function getShipLocation(shipSymbol: string) {
   console.log(ship);
 }
 
-export async function getShipStatusReport(shipSymbol: string) {
+export async function getShipStatusReport(shipSymbol: string): Promise<string> {
   const ship = (await fleet.getMyShip(shipSymbol)).data;
 
   const {
@@ -106,6 +109,6 @@ export async function navigateShip(
     return res;
   } catch (err) {
     console.log("ya goofed. status:  ");
-    console.log(err.response.status);
+    console.log(err?.response?.status);
   }
 }
