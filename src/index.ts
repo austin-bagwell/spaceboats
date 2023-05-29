@@ -1,18 +1,6 @@
 import * as dotenv from "dotenv";
 dotenv.config();
-import {
-  myShips,
-  getShipLocation,
-  getShipStatusReport,
-  navigateShip,
-  purchaseMiningDrone,
-  dockShip,
-  refuelShip,
-  extractResources,
-  orbitShip,
-  getShipCargoHold,
-  sellAllGoods,
-} from "./fleet/ships";
+import { getShipStatusReport } from "./fleet/ships";
 import {
   getVisibleSystems,
   getSystemWaypoints,
@@ -21,6 +9,7 @@ import {
   findWaypointWithShipyard,
   getShipsForSale,
 } from "./systems/systems";
+import { getMyAgent } from "./agent/agent";
 import { automine } from "./fleet/mining/automine";
 import { NavigateShipRequest } from "@spacejunk/airlock";
 import { error } from "console";
@@ -38,6 +27,9 @@ const shipyardReq = {
   waypointSymbol: shipyardWaypoint,
 };
 
-// getShipStatusReport(miningDrone).then((res) => console.log(res));
+// getMyAgent()
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
+getShipStatusReport(miningDrone).then((res) => console.log(res));
 // automine(miningDrone);
 // dockShip(miningDrone).then(() => sellAllGoods(miningDrone));

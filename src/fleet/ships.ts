@@ -1,4 +1,4 @@
-import { config } from "../config";
+import { config } from "../utils/config";
 import {
   FleetApi,
   NavigateShipRequest,

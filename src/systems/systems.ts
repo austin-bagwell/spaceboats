@@ -1,4 +1,4 @@
-import { config } from "../config";
+import { config } from "../utils/config";
 import {
   SystemsApi,
   GetSystemWaypoints200ResponseToJSON,
