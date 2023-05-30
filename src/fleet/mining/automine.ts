@@ -10,20 +10,30 @@ import { wait } from "../../utils/wait";
 // TODO some ideas for infinitely looping the miner
 // https://www.reddit.com/r/node/comments/d1v8vb/how_to_implement_an_endless_loop_of_promises/
 export async function automine(ship: string) {
-  while (true) {
-    await orbitShip(ship)
-      .then(() => extractUntilFullCargoHold(ship))
-      .then(() => dockShip(ship))
-      .then(() => sellAllGoods(ship))
-      .then(() => wait(5))
-      .catch((err) => {
-        const {
-          response: { status, headers },
-        } = err;
-        console.log(`error status: ${status}`);
-        console.log(headers);
-      });
+  try {
+    await orbitShip(ship);
+    await extractUntilFullCargoHold(ship);
+    await dockShip(ship);
+    await sellAllGoods(ship);
+    await wait(5);
+  } catch (err) {
+    const {
+      response: { status, headers },
+    } = err;
+    console.log(`error status: ${status}`);
+    console.log(headers);
   }
+  // .then(() => )
+  // .then(() => dockShip(ship))
+  // .then(() => sellAllGoods(ship))
+  // .then(() => wait(5))
+  // .catch((err) => {
+  //   const {
+  //     response: { status, headers },
+  //   } = err;
+  //   console.log(`error status: ${status}`);
+  //   console.log(headers);
+  // });
 }
 
 async function isCargoFull(ship: string, percentFull?: number) {

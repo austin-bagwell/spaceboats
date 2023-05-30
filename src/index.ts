@@ -13,6 +13,7 @@ import { getMyAgent } from "./agent/agent";
 import { automine } from "./fleet/mining/automine";
 import { NavigateShipRequest } from "@spacejunk/airlock";
 import { error } from "console";
+import { wait } from "./utils/wait";
 
 const hqSystem = "X1-VS75";
 const planet = "PLANET";
@@ -38,12 +39,12 @@ const shipyardReq = {
 // dockShip(miningDrone).then(() => sellAllGoods(miningDrone));
 
 // nope
-// async function loop() {
-//   try {
-//     await automine(miningDrone);
-//     loop();
-//   } catch (e) {
-//     console.log(e);
-//   }
-// }
-// loop();
+async function loop() {
+  try {
+    await automine(miningDrone);
+    loop();
+  } catch (e) {
+    await wait(5).then(() => console.log(e));
+  }
+}
+loop();
