@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 dotenv.config();
-import { getShipStatusReport } from "./fleet/ships";
+import { getShipStatusReport, dockShip, sellAllGoods } from "./fleet/ships";
 import {
   getVisibleSystems,
   getSystemWaypoints,
@@ -30,6 +30,20 @@ const shipyardReq = {
 // getMyAgent()
 //   .then((res) => console.log(res))
 //   .catch((err) => console.log(err));
-getShipStatusReport(miningDrone).then((res) => console.log(res));
+// getShipStatusReport(miningDrone).then((res) => console.log(res));
+// getShipsForSale(shipyardReq)
+//   .then((res) => console.table(res))
+//   .catch((err) => console.log(err));
 // automine(miningDrone);
 // dockShip(miningDrone).then(() => sellAllGoods(miningDrone));
+
+// nope
+// async function loop() {
+//   try {
+//     await automine(miningDrone);
+//     loop();
+//   } catch (e) {
+//     console.log(e);
+//   }
+// }
+// loop();

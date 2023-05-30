@@ -4,6 +4,7 @@ import {
   GetSystemWaypoints200ResponseToJSON,
   WaypointTrait,
   GetShipyardRequest,
+  GetShipyard200Response,
 } from "@spacejunk/airlock";
 
 const systems = new SystemsApi(config);
@@ -11,7 +12,20 @@ const systems = new SystemsApi(config);
 export async function getShipsForSale(request: GetShipyardRequest) {
   const { systemSymbol, waypointSymbol } = request;
   const shipyard = (await systems.getShipyard(systemSymbol, waypointSymbol))
-    .data.shipTypes;
+    .data.ships;
+
+  if (shipyard) {
+    const ships = [];
+    for (let ship of shipyard) {
+      const { type, name, description, purchasePrice } = ship;
+      const shipDetails = `${name} Price: ${purchasePrice} Type: ${type} `;
+      ships.push({ type, name, purchasePrice });
+      // ships.push(shipDetails);
+    }
+    // ships.unshift(`Ships for sale at ${waypointSymbol}:`);
+    // console.table(ships);
+    return ships;
+  }
   return shipyard;
 }
 
