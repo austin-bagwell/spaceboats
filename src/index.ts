@@ -1,6 +1,14 @@
 import * as dotenv from "dotenv";
 dotenv.config();
-import { getShipStatusReport, dockShip, sellAllGoods } from "./fleet/ships";
+import {
+  getShipStatusReport,
+  dockShip,
+  sellAllGoods,
+  navigateShip,
+  purchaseMiningDrone,
+  myShips,
+  refuelShip,
+} from "./fleet/ships";
 import {
   getVisibleSystems,
   getSystemWaypoints,
@@ -12,39 +20,76 @@ import {
 import { getMyAgent } from "./agent/agent";
 import { automine } from "./fleet/mining/automine";
 import { NavigateShipRequest } from "@spacejunk/airlock";
-import { error } from "console";
 import { wait } from "./utils/wait";
 
-const hqSystem = "X1-VS75";
+const hqSystem = "X1-HQ18";
+const hqPlant = "X1-HQ18-11700D";
 const planet = "PLANET";
 const asteroidField = "ASTEROID_FIELD";
-const asteroidFieldWaypoint = "X1-VS75-67965Z";
-const shipyardWaypoint = "X1-VS75-97637F";
+const asteroidFieldWaypoint = "X1-HQ18-98695F";
+const shipyardWaypoint = "X1-HQ18-60817D";
 const frigateSymbol = "JITSUJAMMER-1";
-const miningDrone = "JITSUJAMMER-2";
+const surveryDrone = "JITSUJAMMER-2";
+const miningDrone = "JITSUJAMMER-3";
 
 const shipyardReq = {
   systemSymbol: hqSystem,
   waypointSymbol: shipyardWaypoint,
 };
 
-// getMyAgent()
+// myShips()
 //   .then((res) => console.log(res))
 //   .catch((err) => console.log(err));
-// getShipStatusReport(miningDrone).then((res) => console.log(res));
+
+// findWaypointWithShipyard(hqSystem)
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
+
+// getShipsForSale(shipyardReq)
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
+
+// purchaseMiningDrone(shipyardWaypoint)
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
+
+// getWaypointsOfType(hqSystem, "ASTEROID_FIELD")
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
+
+// navigateShip(miningDrone, { waypointSymbol: asteroidFieldWaypoint })
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
+
+refuelShip(miningDrone)
+  .then((res) => console.log(res))
+  .catch((err) => console.log(err));
+
+// getShipStatusReport(frigateSymbol)
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
+
+// getShipStatusReport(surveryDrone)
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
+
+// getShipStatusReport(miningDrone)
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
+
 // getShipsForSale(shipyardReq)
 //   .then((res) => console.table(res))
 //   .catch((err) => console.log(err));
-// automine(miningDrone);
 // dockShip(miningDrone).then(() => sellAllGoods(miningDrone));
 
+// automine(miningDrone);
 // nope
-async function loop() {
-  try {
-    await automine(miningDrone);
-    loop();
-  } catch (e) {
-    await wait(5).then(() => console.log(e));
-  }
-}
-loop();
+// async function loop() {
+//   try {
+//     await automine(miningDrone);
+//     loop();
+//   } catch (e) {
+//     await wait(5).then(() => console.log(e));
+//   }
+// }
+// loop();

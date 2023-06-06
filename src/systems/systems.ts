@@ -5,12 +5,17 @@ import {
   WaypointTrait,
   GetShipyardRequest,
   GetShipyard200Response,
+  GetWaypointRequest,
 } from "@spacejunk/airlock";
+
+import { Waypoint } from "@spacejunk/airlock";
 
 const systems = new SystemsApi(config);
 
-export async function getShipsForSale(request: GetShipyardRequest) {
-  const { systemSymbol, waypointSymbol } = request;
+export async function getShipsForSale({
+  systemSymbol,
+  waypointSymbol,
+}: GetWaypointRequest) {
   const shipyard = (await systems.getShipyard(systemSymbol, waypointSymbol))
     .data.ships;
 
@@ -20,10 +25,7 @@ export async function getShipsForSale(request: GetShipyardRequest) {
       const { type, name, description, purchasePrice } = ship;
       const shipDetails = `${name} Price: ${purchasePrice} Type: ${type} `;
       ships.push({ type, name, purchasePrice });
-      // ships.push(shipDetails);
     }
-    // ships.unshift(`Ships for sale at ${waypointSymbol}:`);
-    // console.table(ships);
     return ships;
   }
   return shipyard;
@@ -68,26 +70,34 @@ export async function getWaypointsOfType(system: string, type: string) {
 export async function getWaypointTraits(system: string) {
   const waypoints = await getSystemWaypoints(system);
 
-  const list = [];
-  for (const waypoint of waypoints) {
-    const symbol = waypoint.symbol;
-    const traits = waypoint.traits;
-    const deets = { symbol, traits };
-    list.push(deets);
+  const traits: Array<Waypoint> = [];
+  if (waypoints) {
+    for (const waypoint of waypoints) {
+      const symbol = waypoint.symbol;
+      const traits = waypoint.traits;
+      const deets = { symbol, traits };
+      traits.push(deets);
+    }
   }
 
-  console.table(list);
+  return traits;
 }
 
 export async function findWaypointWithShipyard(system: string) {
   const systemWaypoints = await getSystemWaypoints(system);
 
-  for (const waypoint of systemWaypoints) {
-    const traits = waypoint.traits;
-    traits.forEach((trait: WaypointTrait) => {
-      if (trait.symbol === "SHIPYARD") {
-        console.log(`waypoint ${waypoint.symbol} has a shipyard`);
-      }
-    });
+  const shipyards: Array<Waypoint> = [];
+  if (systemWaypoints) {
+    for (const waypoint of systemWaypoints) {
+      const traits = waypoint.traits;
+      traits.forEach((trait: WaypointTrait) => {
+        if (trait.symbol === "SHIPYARD") {
+          console.log(`waypoint ${waypoint.symbol} has a shipyard`);
+          shipyards.push(waypoint);
+        }
+      });
+    }
   }
+
+  return shipyards;
 }

@@ -9,6 +9,15 @@ import {
 
 const fleet = new FleetApi(config);
 
+export async function myShips() {
+  try {
+    const ships = (await fleet.getMyShips()).data;
+    return ships;
+  } catch (err) {
+    return err;
+  }
+}
+
 export async function sellOneGood(
   ship: string,
   cargo: SellCargoRequest
@@ -63,13 +72,6 @@ export async function purchaseMiningDrone(waypoint: string) {
   };
   const res = (await fleet.purchaseShip(request)).data;
   return res;
-}
-
-export async function myShips() {
-  fleet
-    .getMyShips()
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
 }
 
 export async function getShipLocation(shipSymbol: string) {

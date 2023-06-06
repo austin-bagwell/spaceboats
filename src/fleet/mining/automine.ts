@@ -23,17 +23,6 @@ export async function automine(ship: string) {
     console.log(`error status: ${status}`);
     console.log(headers);
   }
-  // .then(() => )
-  // .then(() => dockShip(ship))
-  // .then(() => sellAllGoods(ship))
-  // .then(() => wait(5))
-  // .catch((err) => {
-  //   const {
-  //     response: { status, headers },
-  //   } = err;
-  //   console.log(`error status: ${status}`);
-  //   console.log(headers);
-  // });
 }
 
 async function isCargoFull(ship: string, percentFull?: number) {
@@ -49,8 +38,7 @@ async function extractUntilFullCargoHold(ship: string) {
   let fullHold = false;
   while (!fullHold) {
     const { cooldown, extraction, cargo } = await extractResources(ship);
-    // temporarily setting to 25% for faster testing turnaround
-    fullHold = await isCargoFull(ship, 10);
+    fullHold = await isCargoFull(ship, 85);
     const { symbol, units } = extraction._yield;
     const { capacity, units: cargoUnits } = cargo;
     console.log(`extracted ${units} of ${symbol}`);
