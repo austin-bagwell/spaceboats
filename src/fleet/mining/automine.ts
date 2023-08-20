@@ -17,11 +17,7 @@ export async function automine(ship: string) {
     await sellAllGoods(ship);
     await wait(5);
   } catch (err) {
-    const {
-      response: { status, headers },
-    } = err;
-    console.log(`error status: ${status}`);
-    console.log(headers);
+    console.log(err);
   }
 }
 

@@ -32,14 +32,14 @@ const frigateSymbol = "JITSUJAMMER-1";
 const surveryDrone = "JITSUJAMMER-2";
 const miningDrone = "JITSUJAMMER-3";
 
-const shipyardReq = {
-  systemSymbol: hqSystem,
-  waypointSymbol: shipyardWaypoint,
-};
+// const shipyardReq = {
+//   systemSymbol: hqSystem,
+//   waypointSymbol: shipyardWaypoint,
+// };
 
-// myShips()
-//   .then((res) => console.log(res))
-//   .catch((err) => console.log(err));
+myShips()
+  .then((res) => console.log(res))
+  .catch((err) => console.log(err));
 
 // findWaypointWithShipyard(hqSystem)
 //   .then((res) => console.log(res))
@@ -61,9 +61,9 @@ const shipyardReq = {
 //   .then((res) => console.log(res))
 //   .catch((err) => console.log(err));
 
-refuelShip(miningDrone)
-  .then((res) => console.log(res))
-  .catch((err) => console.log(err));
+// refuelShip(miningDrone)
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
 
 // getShipStatusReport(frigateSymbol)
 //   .then((res) => console.log(res))

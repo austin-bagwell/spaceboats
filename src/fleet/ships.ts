@@ -111,6 +111,6 @@ export async function navigateShip(
     return res;
   } catch (err) {
     console.log("ya goofed. status:  ");
-    console.log(err?.response?.status);
+    console.log(err);
   }
 }
