@@ -36,7 +36,7 @@ const frigateSymbol = "JITSUJAMMER-1";
 const surveryDrone = "JITSUJAMMER-2";
 const miningDrone = "JITSUJAMMER-3";
 
-const myCoolShip = new AustinShip(`austin's ship`, "JITSUJAMMER-1");
+const myCoolShip = new BaseShip(`austin's ship`, "JITSUJAMMER-1");
 
 myCoolShip.getStatus();
 
