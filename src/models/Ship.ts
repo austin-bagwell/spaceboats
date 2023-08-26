@@ -21,6 +21,14 @@ class BaseShip extends FleetApi {
     const res = await this.getMyShip(this.symbol);
     console.log(res);
   }
+
+  async dock() {
+    await this.dockShip(this.symbol);
+  }
+
+  async orbit() {
+    await this.orbitShip(this.symbol);
+  }
 }
 
 export { BaseShip };
