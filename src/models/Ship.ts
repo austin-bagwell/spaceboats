@@ -12,8 +12,8 @@ class BaseShip extends FleetApi {
   }
 
   async getStatus() {
-    const res = await this.getMyShip(this.symbol);
-    console.log(res);
+    const status = await this.getMyShip(this.symbol);
+    return status;
   }
 
   async dock() {
