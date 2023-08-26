@@ -9,6 +9,10 @@ import { config } from "../utils/config";
 class BaseShip extends FleetApi {
   symbol: string;
   cooldown: number;
+  // nav status? inTransit, etc.
+  // docked status?
+  // fuel tank?
+  // cargo details?
 
   constructor(symbol: string) {
     super(config);
@@ -22,11 +26,15 @@ class BaseShip extends FleetApi {
   }
 
   async dock() {
-    await this.dockShip(this.symbol);
+    await super.dockShip(this.symbol);
   }
 
   async orbit() {
-    await this.orbitShip(this.symbol);
+    await super.orbitShip(this.symbol);
+  }
+
+  async refuel() {
+    await super.refuelShip(this.symbol);
   }
 
   async navigateTo(waypoint: NavigateShipRequest) {
