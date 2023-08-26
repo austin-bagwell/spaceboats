@@ -2,19 +2,13 @@ import { FleetApi } from "@spacejunk/airlock";
 import { config } from "../utils/config";
 
 class BaseShip extends FleetApi {
-  nickname: string;
   cooldown: number;
   symbol: string;
 
-  constructor(nickname: string, symbol: string) {
+  constructor(symbol: string) {
     super(config);
     this.symbol = symbol;
-    this.nickname = nickname;
     this.cooldown = 0;
-  }
-
-  sayNickname() {
-    console.log(`I'm a ship! my nickname is ${this.nickname}`);
   }
 
   async getStatus() {
