@@ -3,8 +3,9 @@ dotenv.config();
 
 import { BaseShip } from "./models/Ship";
 
-const myCoolShip = new BaseShip("JITSUJAMMER-1");
+const flagshipFrigate = new BaseShip("SPACEBOATS-1");
+const miningShip = new BaseShip("SPACEBOATS-3");
 
-// myCoolShip.getStatus();
-// myCoolShip.dock();
-myCoolShip.getStatus();
+const surveryShip = new BaseShip("SPACEBOATS-2");
+
+flagshipFrigate.getStatus().then((res) => console.log(res));
