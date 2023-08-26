@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 
-import { AustinShip } from "./models/Ship";
+import { BaseShip } from "./models/Ship";
 import { config } from "./utils/config";
 
 import {
@@ -36,22 +36,9 @@ const frigateSymbol = "JITSUJAMMER-1";
 const surveryDrone = "JITSUJAMMER-2";
 const miningDrone = "JITSUJAMMER-3";
 
-const myCoolShip = new AustinShip(`austin's ship`);
+const myCoolShip = new AustinShip(`austin's ship`, "JITSUJAMMER-1");
 
-async function logShipsFromShip() {
-  const res = await myCoolShip.getMyShips();
-  console.log("my ships, as called from models/Ship.ts");
-  console.log(res);
-
-  // const notResIWant = await myShips();
-  // console.log(
-  //   "myShips, as called from models/Ship.ts imported from ./fleet/ships.ts"
-  // );
-  // console.log(notResIWant);
-}
-
-myCoolShip.sayNickname();
-logShipsFromShip();
+myCoolShip.getStatus();
 
 // const shipyardReq = {
 //   systemSymbol: hqSystem,

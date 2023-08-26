@@ -1,7 +1,7 @@
 import { FleetApi } from "@spacejunk/airlock";
 import { config } from "../utils/config";
 
-class AustinShip extends FleetApi {
+class BaseShip extends FleetApi {
   nickname: string;
   cooldown: number;
   symbol: string;
@@ -23,4 +23,4 @@ class AustinShip extends FleetApi {
   }
 }
 
-export { AustinShip };
+export { BaseShip };
