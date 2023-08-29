@@ -1,3 +1,27 @@
+# 8/28
+
+## 9:30pm
+
+going through prisma docs. got as far as 'add to existing project' > 'introspection' using the example tables shown in the docs tutorials. database is connected through the docker container spaceboats-db.
+
+ran npx prisma generate for the tutorial tables
+
+still need to do a fair bit of research to set up some basic tables for Ships etc. and then sort out a query to read my existing ships into said tables. not gonna do that tonight, but it's a good next step.
+
+after that, maybe I'll take a stab at rewriting the automine routine to use OOP with my simple model of the ships I extended from the FleetAPI.
+
+## < 8am
+
+made a docker postgres container spaceboats-db
+user: austin
+pw: Twinkle19!
+port: 5455
+
+`npm i prisma, npx init prisma`
+
+still need to make a test table so I can setup and test Prisma
+dunno how to do that but I think it's time to make some coffee
+
 # hooo buddy where to start
 
 ## automation
