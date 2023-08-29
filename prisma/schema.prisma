@@ -7,36 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  title     String   @db.VarChar(255)
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  content   String?
-  published Boolean  @default(false)
-  authorId  Int
-  User      User     @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  userId Int     @unique
-  User   User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model User {
-  id      Int      @id @default(autoincrement())
-  name    String?  @db.VarChar(255)
-  email   String   @unique @db.VarChar(255)
-  Post    Post[]
-  Profile Profile?
-}
-
-model films {
-  code      String                   @id(map: "firstkey") @db.Char(5)
-  title     String                   @db.VarChar(40)
-  did       Int
-  date_prod DateTime?                @db.Date
-  kind      String?                  @db.VarChar(10)
-  len       Unsupported("interval")?
+model ship {
+  ship_id     Int    @id @default(autoincrement())
+  ship_symbol String @unique
 }
