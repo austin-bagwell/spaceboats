@@ -8,6 +8,13 @@ datasource db {
 }
 
 model ship {
-  ship_id     Int    @id @default(autoincrement())
-  ship_symbol String @unique
+  pk             Int    @id @default(autoincrement())
+  shipSymbol     String @unique
+  systemSymbol   String
+  waypointSymbol String
+  navStatus      String
+  fuelCurrent    Int
+  fuelCapacity   Int
+  cargoCapacity  Int
+  cargoOnboard   Int    @default(0)
 }
