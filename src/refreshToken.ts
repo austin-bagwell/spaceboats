@@ -47,13 +47,17 @@ function updateApiToken(token: string): void {
   // why yes this is me assuming the token will always be [0]
   // i'll fix handling for multiple variables later
   // like after i set up a db connect etc.
-  const environmentToken = environment[0];
+  const apiToken = environment[0];
 
-  Object.assign(environmentToken, { key: "TOKEN", value: token });
+  Object.assign(apiToken, { key: "TOKEN", value: token });
+  environment[0] = apiToken;
 
-  function convertToString(environmentVar: EnvironmentVariable) {
-    return `${environmentVar.key}="${environmentVar.value.toString()}"`;
-  }
+  fs.writeFileSync(path, convertToString(environment));
+}
 
-  fs.writeFileSync(path, convertToString(environmentToken));
+function convertToString(environmentVariables: Array<EnvironmentVariable>) {
+  const string = environmentVariables.map(
+    (variable) => `${variable.key}="${variable.value.toString()}"`
+  );
+  return string.join("\n");
 }
