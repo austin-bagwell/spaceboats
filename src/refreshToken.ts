@@ -11,20 +11,22 @@ const options = {
   }),
 };
 
-fetch("https://api.spacetraders.io/v2/register", options)
-  .then((response) => response.json())
-  .then((response) => {
-    const token = response.data.token;
-    if (token) {
-      console.log(`new token:`);
-      console.log(`${token}`);
-      updateApiToken(`"${token}"`);
-    } else {
-      console.log(`couldn't update token`);
-      console.log(response);
-    }
-  })
-  .catch((err) => console.error(err));
+async function updateApiToken() {
+  await fetch("https://api.spacetraders.io/v2/register", options)
+    .then((response) => response.json())
+    .then((response) => {
+      const token = response.data.token;
+      if (token) {
+        console.log(`new token:`);
+        console.log(`${token}`);
+        updateEnvWithNewToken(`"${token}"`);
+      } else {
+        console.log(`couldn't update token`);
+        console.log(response);
+      }
+    })
+    .catch((err) => console.error(err));
+}
 
 interface EnvironmentVariable {
   key: string;
@@ -32,7 +34,7 @@ interface EnvironmentVariable {
 }
 
 // boy howdy this is kinda ugly
-function updateApiToken(token: string): void {
+function updateEnvWithNewToken(token: string): void {
   const path = "/Users/austin/projects/spaceboats/.env";
 
   const envFile = fs.readFileSync(path, {
@@ -64,3 +66,5 @@ function convertToString(environmentVariables: Array<EnvironmentVariable>) {
   );
   return string.join("\n");
 }
+
+export { updateApiToken };
