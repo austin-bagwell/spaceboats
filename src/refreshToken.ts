@@ -6,7 +6,7 @@ const options = {
     "Content-Type": "application/json",
   },
   body: JSON.stringify({
-    symbol: "JITSUJAMMER",
+    symbol: "SPACEBOATS",
     faction: "COSMIC",
   }),
 };
@@ -18,9 +18,10 @@ fetch("https://api.spacetraders.io/v2/register", options)
     if (token) {
       console.log(`new token:`);
       console.log(`${token}`);
-      updateApiToken(token);
+      updateApiToken(`"${token}"`);
     } else {
       console.log(`couldn't update token`);
+      console.log(response);
     }
   })
   .catch((err) => console.error(err));
@@ -57,7 +58,7 @@ function updateApiToken(token: string): void {
 
 function convertToString(environmentVariables: Array<EnvironmentVariable>) {
   const string = environmentVariables.map(
-    (variable) => `${variable.key}="${variable.value.toString()}"`
+    (variable) => `${variable.key}=${variable.value.toString()}`
   );
   return string.join("\n");
 }
