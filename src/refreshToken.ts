@@ -1,17 +1,22 @@
 import * as fs from "fs";
 
-const options = {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    symbol: "SPACEBOATS",
-    faction: "COSMIC",
-  }),
-};
+interface AgentOptions {
+  symbol: string;
+  faction?: string;
+}
 
-async function updateApiToken() {
+async function updateApiToken({ symbol, faction = "COSMIC" }: AgentOptions) {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      symbol: symbol,
+      faction: faction,
+    }),
+  };
+
   await fetch("https://api.spacetraders.io/v2/register", options)
     .then((response) => response.json())
     .then((response) => {
