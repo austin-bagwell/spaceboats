@@ -39,10 +39,12 @@ function updateApiToken(token: string): void {
     encoding: "utf8",
   });
 
-  const environment = envFile.split("\n").map((variable) => {
-    const [key, value] = variable.split("=");
-    return { key, value };
-  });
+  const environment: Array<EnvironmentVariable> = envFile
+    .split("\n")
+    .map((variable) => {
+      const [key, value] = variable.split("=");
+      return { key, value };
+    });
 
   // TODO
   // why yes this is me assuming the token will always be [0]
