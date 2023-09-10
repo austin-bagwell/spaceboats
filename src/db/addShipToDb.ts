@@ -1,6 +1,6 @@
 import { prisma } from "./prismaClient";
 
-interface ShipPropsDB {
+export interface ShipPropsDB {
   shipSymbol: string;
   systemSymbol: string;
   waypointSymbol: string;
@@ -20,8 +20,7 @@ async function addShiptoDb(ship: ShipPropsDB) {
     throw new Error(`Couldn't add ${ship.shipSymbol} to the database`);
   }
 
-  // can use return value of ship to log/use info about the ship that was just created
-  // return ship;
+  return ship;
 }
 
 export { addShiptoDb };
