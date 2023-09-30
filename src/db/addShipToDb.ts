@@ -1,23 +1,29 @@
 import { prisma } from "./prismaClient";
+import { Ship } from "@spacejunk/airlock";
 
-export interface ShipPropsDB {
-  shipSymbol: string;
-  systemSymbol: string;
-  waypointSymbol: string;
-  navStatus: string;
-  fuelCurrent: number;
-  fuelCapacity: number;
-  cargoCapacity: number;
-  cargoOnboard: number;
-}
+async function addShiptoDb(ship: Ship) {
+  const {
+    symbol: shipSymbol,
+    nav: { waypointSymbol, systemSymbol, status: navStatus },
+    fuel: { capacity: fuelCapacity, current: fuelCurrent },
+    cargo: { capacity: cargoCapacity, units: cargoOnboard },
+  } = ship;
 
-async function addShiptoDb(ship: ShipPropsDB) {
   const dbShip = await prisma.ship.create({
-    data: ship,
+    data: {
+      shipSymbol,
+      waypointSymbol,
+      systemSymbol,
+      navStatus,
+      fuelCapacity,
+      fuelCurrent,
+      cargoCapacity,
+      cargoOnboard,
+    },
   });
 
   if (!dbShip) {
-    throw new Error(`Couldn't add ${ship.shipSymbol} to the database`);
+    throw new Error(`Couldn't add ${ship.symbol} to the database`);
   }
 
   return ship;
