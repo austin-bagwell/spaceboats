@@ -7,7 +7,7 @@ import {
   SellCargo201ResponseData,
 } from "@spacejunk/airlock";
 
-const fleet = new FleetApi(config);
+export const fleet = new FleetApi(config);
 
 export async function myShips() {
   try {
