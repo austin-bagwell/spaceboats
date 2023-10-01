@@ -7,6 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// FLEET
 model ship {
   pk             Int    @id @default(autoincrement())
   shipSymbol     String @unique
@@ -17,4 +18,91 @@ model ship {
   fuelCapacity   Int
   cargoCapacity  Int
   cargoOnboard   Int    @default(0)
+}
+
+// SYSTEM
+model System {
+  pk           Int        @id @default(autoincrement())
+  symbol       String     @unique
+  type         SystemType
+  sectorSymbol String
+  xCoord       Int
+  yCoord       Int
+  waypoints    Waypoint[]
+  factions     Faction[]
+}
+
+enum SystemType {
+  NEUTRON_STAR
+  RED_STAR
+  ORANGE_STAR
+  BLUE_STAR
+  YOUNG_STAR
+  WHITE_DWARF
+  BLACK_HOLE
+  HYPERGIANT
+  NEBULA
+  UNSTABLE
+}
+
+model Waypoint {
+  pk        Int          @id @default(autoincrement())
+  symbol    String       @unique
+  type      WaypointType
+  xCoord    Int
+  yCoord    Int
+  orbits    String?
+  traits    Trait[]
+  System    System?      @relation(fields: [systemPk], references: [pk])
+  systemPk  Int?
+  faction   Faction      @relation(fields: [factionPk], references: [pk])
+  factionPk Int
+  chart     Chart[]
+}
+
+enum WaypointType {
+  PLANET
+  GAS_GIANT
+  MOON
+  ORBITAL_STATION
+  JUMP_GATE
+  ASTEROID_FIELD
+  NEBULA
+  DEBRIS_FIELD
+  GRAVITY_WELL
+}
+
+model Chart {
+  pk             Int       @id @default(autoincrement())
+  waypointSymbol String
+  submittedBy    String
+  // "2019-08-24T14:15:22Z"
+  submittedOn    DateTime
+  Waypoint       Waypoint? @relation(fields: [waypointPk], references: [pk])
+  waypointPk     Int?
+}
+
+// FACTION
+model Faction {
+  pk           Int        @id @default(autoincrement())
+  system       String
+  name         String
+  description  String
+  headquarters String
+  traits       Trait[]
+  isRecruiting Boolean
+  System       System?    @relation(fields: [systemPk], references: [pk])
+  systemPk     Int?
+  Waypoint     Waypoint[]
+}
+
+model Trait {
+  pk          Int       @id @default(autoincrement())
+  symbol      String
+  name        String
+  description String
+  factionPk   Int?
+  Faction     Faction?  @relation(fields: [factionPk], references: [pk])
+  Waypoint    Waypoint? @relation(fields: [waypointPk], references: [pk])
+  waypointPk  Int?
 }
