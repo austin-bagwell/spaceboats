@@ -17,4 +17,6 @@ model ship {
   fuelCapacity   Int
   cargoCapacity  Int
   cargoOnboard   Int    @default(0)
+  cooldown       Int    @default(0)
+  routine        String @default("")
 }
