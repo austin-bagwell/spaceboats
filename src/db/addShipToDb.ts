@@ -19,6 +19,8 @@ async function addShiptoDb(ship: Ship) {
       fuelCurrent,
       cargoCapacity,
       cargoOnboard,
+      cooldown: 0,
+      routine: "",
     },
   });
 
