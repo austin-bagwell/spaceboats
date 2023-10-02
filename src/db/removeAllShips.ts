@@ -8,10 +8,10 @@ export async function removeAllShips() {
   }
 
   allShips.forEach(async (ship) => {
-    console.log(`removing ship ${ship.shipSymbol}`);
+    console.log(`removing ship ${ship.symbol}`);
     await prisma.ship.delete({
       where: {
-        shipSymbol: ship.shipSymbol,
+        symbol: ship.symbol,
       },
     });
   });
