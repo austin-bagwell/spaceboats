@@ -19,6 +19,7 @@ async function addShiptoDb(ship: Ship) {
       fuelCurrent,
       cargoCapacity,
       cargoCurrent,
+
     },
   });
 
