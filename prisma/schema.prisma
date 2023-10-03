@@ -23,6 +23,7 @@ model Ship {
   fuelCurrent    Int
   fuelCapacity   Int
   cargoCapacity  Int
+  // TODO remove default(0)
   cargoCurrent   Int    @default(0)
 }
 
