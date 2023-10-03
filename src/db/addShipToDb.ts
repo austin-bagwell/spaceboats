@@ -3,24 +3,23 @@ import { Ship } from "@spacejunk/airlock";
 
 async function addShiptoDb(ship: Ship) {
   const {
-    symbol: shipSymbol,
+    symbol,
     nav: { waypointSymbol, systemSymbol, status: navStatus },
     fuel: { capacity: fuelCapacity, current: fuelCurrent },
-    cargo: { capacity: cargoCapacity, units: cargoOnboard },
+    cargo: { capacity: cargoCapacity, units: cargoCurrent },
   } = ship;
 
   const dbShip = await prisma.ship.create({
     data: {
-      shipSymbol,
+      symbol,
       waypointSymbol,
       systemSymbol,
       navStatus,
       fuelCapacity,
       fuelCurrent,
       cargoCapacity,
-      cargoOnboard,
-      cooldown: 0,
-      routine: "",
+      cargoCurrent,
+
     },
   });
 

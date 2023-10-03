@@ -36,6 +36,7 @@ async function resetGame() {
   console.log(`Agent symbol defaults to JITSUJAMMER for now because I'm lazy.`);
   try {
     await updateApiToken({ symbol: "JITSUJAMMER" });
+    // await dumpDatabase()
     await removeAllShips();
     await addStarterShipsToDb();
   } catch (err) {

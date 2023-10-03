@@ -7,16 +7,180 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model ship {
+// FLEET
+model Ship {
   pk             Int    @id @default(autoincrement())
-  shipSymbol     String @unique
+  symbol         String @unique
+  // registration Registration
+  // crew           Crew
+  // reactor        Reactor
+  // engine         Engine
+  // modules        Module[]
+  // mounts         Mount[]
   systemSymbol   String
   waypointSymbol String
   navStatus      String
   fuelCurrent    Int
   fuelCapacity   Int
   cargoCapacity  Int
-  cargoOnboard   Int    @default(0)
-  cooldown       Int    @default(0)
-  routine        String @default("")
+  // TODO remove default(0)
+  cargoCurrent   Int    @default(0)
+}
+
+// available for sale at shipyard
+enum ShipType {
+  SHIP_PROBE
+  SHIP_MINING_DRONE
+  SHIP_INTERCEPTOR
+  SHIP_LIGHT_HAULER
+  SHIP_COMMAND_FRIGATE
+  SHIP_EXPLORER
+  SHIP_HEAVY_FREIGHTER
+  SHIP_LIGHT_SHUTTLE
+  SHIP_ORE_HOUND
+  SHIP_REFINING_FREIGHTER
+}
+
+enum ShipFrame {
+  FRAME_PROBE
+  FRAME_DRONE
+  FRAME_INTERCEPTOR
+  FRAME_RACER
+  FRAME_FIGHTER
+  FRAME_FRIGATE
+  FRAME_SHUTTLE
+  FRAME_EXPLORER
+  FRAME_MINER
+  FRAME_LIGHT_FREIGHTER
+  FRAME_HEAVY_FREIGHTER
+  FRAME_TRANSPORT
+  FRAME_DESTROYER
+  FRAME_CRUISER
+  FRAME_CARRIER
+}
+
+// SYSTEM
+model System {
+  pk           Int        @id @default(autoincrement())
+  symbol       String     @unique
+  type         SystemType
+  sectorSymbol String
+  xCoord       Int
+  yCoord       Int
+  waypoints    Waypoint[]
+  factions     Faction[]
+  JumpGate     JumpGate?  @relation(fields: [jumpGatePk], references: [pk])
+  jumpGatePk   Int?
+}
+
+enum SystemType {
+  NEUTRON_STAR
+  RED_STAR
+  ORANGE_STAR
+  BLUE_STAR
+  YOUNG_STAR
+  WHITE_DWARF
+  BLACK_HOLE
+  HYPERGIANT
+  NEBULA
+  UNSTABLE
+}
+
+model Waypoint {
+  pk        Int          @id @default(autoincrement())
+  symbol    String       @unique
+  type      WaypointType
+  xCoord    Int
+  yCoord    Int
+  orbits    String?
+  traits    Trait[]
+  System    System?      @relation(fields: [systemPk], references: [pk])
+  systemPk  Int?
+  faction   Faction      @relation(fields: [factionPk], references: [pk])
+  factionPk Int
+  chart     Chart[]
+}
+
+enum WaypointType {
+  PLANET
+  GAS_GIANT
+  MOON
+  ORBITAL_STATION
+  JUMP_GATE
+  ASTEROID_FIELD
+  NEBULA
+  DEBRIS_FIELD
+  GRAVITY_WELL
+}
+
+model Shipyard {
+  pk               Int    @id @default(autoincrement())
+  symbol           String
+  // shipTypes ShipsTypes[]
+  // ships Ship[] 
+  modificationsFee Int
+}
+
+model JumpGate {
+  pk               Int         @id @default(autoincrement())
+  jumpRange        Int
+  factionSymbol    FactionType
+  connectedSystems System[]
+}
+
+model Chart {
+  pk             Int      @id @default(autoincrement())
+  waypointSymbol String
+  submittedBy    String
+  // "2019-08-24T14:15:22Z"
+  submittedOn    DateTime
+  Waypoint       Waypoint @relation(fields: [waypointPk], references: [pk])
+  waypointPk     Int
+}
+
+// FACTION
+model Faction {
+  pk           Int         @id @default(autoincrement())
+  symbol       FactionType
+  name         String
+  description  String
+  headquarters String
+  traits       Trait[]
+  isRecruiting Boolean
+  System       System?     @relation(fields: [systemPk], references: [pk])
+  systemPk     Int?
+  Waypoint     Waypoint[]
+}
+
+enum FactionType {
+  COSMIC
+  VOID
+  GALACTIC
+  QUANTUM
+  DOMINION
+  ASTRO
+  CORSAIRS
+  OBSIDIAN
+  AEGIS
+  UNITED
+  SOLITARY
+  COBALT
+  OMEGA
+  ECHO
+  LORDS
+  CULT
+  ANCIENTS
+  SHADOW
+  ETHEREAL
+}
+
+model Trait {
+  pk          Int       @id @default(autoincrement())
+  symbol      String
+  name        String
+  description String
+  factionPk   Int?
+  Faction     Faction?  @relation(fields: [factionPk], references: [pk])
+  Waypoint    Waypoint? @relation(fields: [waypointPk], references: [pk])
+  waypointPk  Int?
 }
