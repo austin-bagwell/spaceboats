@@ -87,8 +87,6 @@ model System {
   yCoord       Int
   waypoints    Waypoint[]
   factions     Faction[]
-  JumpGate     JumpGate?  @relation(fields: [jumpGatePk], references: [pk])
-  jumpGatePk   Int?
 }
 
 enum SystemType {
@@ -137,13 +135,6 @@ model Shipyard {
   // shipTypes ShipsTypes[]
   // ships Ship[] 
   modificationsFee Int
-}
-
-model JumpGate {
-  pk               Int         @id @default(autoincrement())
-  jumpRange        Int
-  factionSymbol    FactionType
-  connectedSystems System[]
 }
 
 model Chart {
