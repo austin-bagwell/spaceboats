@@ -9,9 +9,10 @@ datasource db {
 
 // FLEET
 model Ship {
-  pk             Int    @id @default(autoincrement())
-  symbol         String @unique
+  pk             Int      @id @default(autoincrement())
+  symbol         String   @unique
   // registration Registration
+  role           ShipRole
   // crew           Crew
   // reactor        Reactor
   // engine         Engine
@@ -24,7 +25,24 @@ model Ship {
   fuelCapacity   Int
   cargoCapacity  Int
   // TODO remove default(0)
-  cargoCurrent   Int    @default(0)
+  cargoCurrent   Int      @default(0)
+}
+
+enum ShipRole {
+  FABRICATOR
+  HARVESTER
+  HAULER
+  INTERCEPTOR
+  EXCAVATOR
+  TRANSPORT
+  REPAIR
+  SURVEYOR
+  COMMAND
+  CARRIER
+  PATROL
+  SATELLITE
+  EXPLORER
+  REFINERY
 }
 
 // available for sale at shipyard
@@ -69,8 +87,6 @@ model System {
   yCoord       Int
   waypoints    Waypoint[]
   factions     Faction[]
-  JumpGate     JumpGate?  @relation(fields: [jumpGatePk], references: [pk])
-  jumpGatePk   Int?
 }
 
 enum SystemType {
@@ -119,13 +135,6 @@ model Shipyard {
   // shipTypes ShipsTypes[]
   // ships Ship[] 
   modificationsFee Int
-}
-
-model JumpGate {
-  pk               Int         @id @default(autoincrement())
-  jumpRange        Int
-  factionSymbol    FactionType
-  connectedSystems System[]
 }
 
 model Chart {

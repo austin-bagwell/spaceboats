@@ -1,20 +1,7 @@
 import { getShipsFromDb } from "../../db/getShipsFromDb";
 
-async function miningRoutine() {
-  const ships = await getShipsFromDb();
+const ships = await getShipsFromDb();
 
-  for (const ship of ships) {
-    const status = ship.navStatus;
-
-    if (status === "DOCKED") {
-      console.log(`ship ${ship.symbol} is docked.`);
-    } else {
-      console.log(`ship ${ship.symbol} status: ${status}.`);
-    }
-  }
-}
-
-miningRoutine();
 /*
 async function miningRoutine(ship: Ship): Promise<MiningResponse> {
     if (ship.navStatus === 'DOCKED') {
