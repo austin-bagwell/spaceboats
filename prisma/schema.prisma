@@ -43,7 +43,6 @@ enum ShipRole {
   SATELLITE
   EXPLORER
   REFINERY
-  cargoCurrent   Int    @default(0)
 }
 
 // available for sale at shipyard
