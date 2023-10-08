@@ -5,15 +5,22 @@ import {
   PurchaseShipRequest,
   SellCargoRequest,
   SellCargo201ResponseData,
+  GetMyShips200Response,
 } from "@spacejunk/airlock";
+import { Ship } from "@spacejunk/airlock";
 
 export const fleet = new FleetApi(config);
 
 export async function myShips() {
   try {
-    const ships = (await fleet.getMyShips()).data;
+    const ships = await fleet.getMyShips();
+
+    if (!ships) {
+      throw new Error("no ships found I guess");
+    }
+
     return ships;
-  } catch (err) {
+  } catch (err: any) {
     return err;
   }
 }
