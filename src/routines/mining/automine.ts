@@ -1,6 +1,18 @@
 import { getShipsFromDb } from "../../db/getShipsFromDb";
 
-const ships = await getShipsFromDb();
+// const ships = await getShipsFromDb();
+
+type AutomineProps = {
+  shipSymbol: string;
+  waypoint: string;
+  contract?: any;
+};
+
+async function automine({ shipSymbol, waypoint }: AutomineProps) {
+  // DB
+  // check ship location, navigate to given waypoint if needed
+  // -- if navigating, set cooldown on ship db object?
+}
 
 /*
 async function miningRoutine(ship: Ship): Promise<MiningResponse> {
