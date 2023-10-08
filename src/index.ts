@@ -1,18 +1,11 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 
-import { BaseShip } from "./models/Ship";
-import { myShips } from "./fleet/ships";
-import { getShipsFromDb } from "./db/getShipsFromDb";
 import { getMyAgent } from "./agent/agent";
-import { addStarterShipsToDb } from "./db/addStarterShipsToDb";
+import { getShipsFromDb } from "./db/getShipsFromDb";
+import { startGame } from "./cli/startGame";
 
-const flagshipFrigate = new BaseShip("SPACEBOATS-1");
-const surveryShip = new BaseShip("SPACEBOATS-2");
-const miningShip = new BaseShip("SPACEBOATS-3");
-
-const ships = ["SPACEBOATS-1", "SPACEBOATS-2", "SPACEBOATS-3"];
-
+startGame();
 // getMyAgent()
 //   .then((res) => console.log(res))
 //   .catch((err) => console.log(err));
@@ -21,5 +14,5 @@ const ships = ["SPACEBOATS-1", "SPACEBOATS-2", "SPACEBOATS-3"];
 //   console.log(res);
 // });
 // addStarterShipsToDb();
-getShipsFromDb();
+// getShipsFromDb();
 // flagshipFrigate.getStatus().then((res) => console.log(res));
