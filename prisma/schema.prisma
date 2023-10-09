@@ -33,6 +33,7 @@ enum ShipRoutine {
   IDLE
   MINE
   EXPLORE
+  PING
 }
 
 enum ShipRole {
