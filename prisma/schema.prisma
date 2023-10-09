@@ -9,8 +9,8 @@ datasource db {
 
 // FLEET
 model Ship {
-  pk             Int      @id @default(autoincrement())
-  symbol         String   @unique
+  pk             Int         @id @default(autoincrement())
+  symbol         String      @unique
   // registration Registration
   role           ShipRole
   // crew           Crew
@@ -24,8 +24,16 @@ model Ship {
   fuelCurrent    Int
   fuelCapacity   Int
   cargoCapacity  Int
-  // TODO remove default(0)
-  cargoCurrent   Int      @default(0)
+  cargoCurrent   Int
+  routine        ShipRoutine @default(IDLE)
+  cooldown       Int         @default(0)
+}
+
+enum ShipRoutine {
+  IDLE
+  MINE
+  EXPLORE
+  PING
 }
 
 enum ShipRole {
