@@ -1,6 +1,6 @@
 import { updateApiToken } from "./refreshToken";
-import { removeAllShips } from "./db/removeAllShips";
-import { addStarterShipsToDb } from "./db/addStarterShipsToDb";
+import { removeAllShips } from "./db/fleet/removeAllShips";
+import { addStarterShipsToDb } from "./db/fleet/addStarterShipsToDb";
 import { createInterface } from "node:readline/promises";
 
 const rl = createInterface({

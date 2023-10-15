@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node src/index.ts",
     "reset": "ts-node src/resetGame.ts",
-    "mine": "ts-node src/routines/mining/automine.ts"
+    "mine": "ts-node src/routines/mining/automine.ts",
+    "dev": "ts-node src/dev.ts"
   },
   "author": "",
   "license": "ISC",
