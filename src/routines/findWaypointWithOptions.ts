@@ -21,7 +21,7 @@ export async function findWaypointWithOptions({
   system,
   traitSymbol,
   lookOutsideSystem = false,
-}: FindNearestWaypointArgs): Promise<Waypoint[] | string> {
+}: FindNearestWaypointArgs): Promise<Waypoint[]> {
   const waypoints = await systems.getSystemWaypoints(system);
 
   const waypointsOfType = waypoints.data.filter((waypoint) => {
@@ -35,12 +35,8 @@ export async function findWaypointWithOptions({
       return hasTraits.length > 0;
     });
 
-    return waypointsWithTrait.length > 0
-      ? waypointsWithTrait
-      : `No waypoint found with trait ${traitSymbol}`;
+    return waypointsWithTrait;
   }
 
-  return waypointsOfType.length > 0
-    ? waypointsOfType
-    : `didn't find waypoint of type ${type}`;
+  return waypointsOfType;
 }
