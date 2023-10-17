@@ -9,34 +9,46 @@ import { config } from "../utils/config";
 const systems = new SystemsApi(config);
 
 type FindNearestWaypointArgs = {
-  type: WaypointType;
+  type?: WaypointType;
   system: string;
   traitSymbol?: WaypointTraitSymbolEnum;
   lookOutsideSystem?: boolean;
 };
-// rename... findWaypointInSystemWithOptions ???
-// FIXME - not returning what I want it to return
+
 export async function findWaypointWithOptions({
   type,
   system,
   traitSymbol,
   lookOutsideSystem = false,
-}: FindNearestWaypointArgs): Promise<Waypoint[]> {
+}: FindNearestWaypointArgs): Promise<Waypoint[] | undefined> {
   const waypoints = await systems.getSystemWaypoints(system);
 
-  const waypointsOfType = waypoints.data.filter((waypoint) => {
-    return waypoint.type === type;
-  });
-
-  if (traitSymbol) {
-    const waypointsWithTrait = waypointsOfType.filter((waypoint) => {
-      const traits = waypoint.traits;
-      const hasTraits = traits.filter((trait) => trait.symbol === traitSymbol);
-      return hasTraits.length > 0;
-    });
-
-    return waypointsWithTrait;
+  if (!waypoints.data) {
+    throw new Error(`Didn't find any waypoints in system ${system}`);
   }
 
-  return waypointsOfType;
+  if (type && traitSymbol) {
+    return waypoints.data.filter((waypoint) => {
+      const hasTrait =
+        waypoint.traits.filter((trait) => trait.symbol === traitSymbol).length >
+        0;
+      return waypoint.type === type && hasTrait;
+    });
+  }
+
+  if (type) {
+    return waypoints.data.filter((waypoint) => {
+      return waypoint.type === type;
+    });
+  }
+
+  if (traitSymbol) {
+    const hasTrait = waypoints.data.filter((waypoint) => {
+      const traits = waypoint.traits;
+      const hasTrait = traits.filter((trait) => trait.symbol === traitSymbol);
+      return hasTrait.length > 0;
+    });
+
+    return hasTrait;
+  }
 }
