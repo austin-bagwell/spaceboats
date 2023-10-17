@@ -26,10 +26,12 @@ export async function sendSendToBuyShip({
   const waypoint = waypointSymbol
     ? waypointSymbol
     : await findWaypointWithOptions({
-        type: "PLANET",
         system,
         traitSymbol: "SHIPYARD",
       });
+
+  console.log(`waypoint(s)`);
+  console.log(waypoint);
 
   if (!waypoint) {
     throw new Error(`Could't find a waypoint with a shipyard`);
@@ -50,7 +52,7 @@ export async function sendSendToBuyShip({
     }
 
     const purchasedShip = await fleet.purchaseShip({
-      waypointSymbol: waypoint,
+      waypointSymbol: currentLocation,
       shipType,
     });
     return purchasedShip;
