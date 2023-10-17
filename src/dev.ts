@@ -6,6 +6,8 @@ import { findWaypointWithOptions } from "./routines/findWaypointWithOptions";
 import { sendSendToBuyShip } from "./routines/sendShipToBuyShip";
 import { getShipsFromDb } from "./db/fleet/getShipsFromDb";
 import { addStarterShipsToDb } from "./db/fleet/addStarterShipsToDb";
+import { getDelta } from "./utils/getDelta";
+
 // startGame();
 // findWaypointWithOptions({
 //   type: "ORBITAL_STATION",
@@ -51,16 +53,16 @@ Need to write a way to get a PuchaseShip201 ship into the database as a part of 
 }
 */
 
-sendSendToBuyShip({
-  waypointSymbol: "X1-CS80-57647D",
-  sendShip: "JITSUJAMMER-2",
-  shipType: "SHIP_MINING_DRONE",
-})
-  .then((res) => console.log(res))
-  .catch((err) => {
-    console.log(err);
-    console.log(err.response);
-  });
+// sendSendToBuyShip({
+//   waypointSymbol: "X1-CS80-57647D",
+//   sendShip: "JITSUJAMMER-1",
+//   shipType: "SHIP_MINING_DRONE",
+// });
+//   .then((res) => console.log(res))
+//   .catch((err) => {
+//     console.log(err);
+//     console.log(err.response);
+//   });
 
 // addStarterShipsToDb()
 //   .then((res) => console.log(res))
