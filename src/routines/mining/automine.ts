@@ -1,5 +1,5 @@
 import { prisma } from "../../db/prismaClient";
-import { getShipFromDb } from "../../db/fleet/getShipsFromDb";
+import { getShipFromDb } from "../../db/fleet/read";
 import { FleetApi } from "@spacejunk/airlock";
 import { config } from "../../utils/config";
 import { wait } from "../../utils/wait";

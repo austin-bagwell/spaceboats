@@ -1,5 +1,5 @@
 import { addShipToDb } from "../db/fleet/create";
-import { getShipFromDb } from "../db/fleet/getShipsFromDb";
+import { getShipFromDb } from "../db/fleet/read";
 import { FleetApi, ShipType } from "@spacejunk/airlock";
 import { wait } from "../utils/wait";
 import { getDelta } from "../utils/getDelta";
