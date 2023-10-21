@@ -1,5 +1,5 @@
 import { fleet } from "../../fleet/ships";
-import { addShiptoDb } from "./addShipToDb";
+import { addShipToDb } from "./create";
 
 async function addStarterShipsToDb() {
   await fleet
@@ -9,7 +9,7 @@ async function addStarterShipsToDb() {
       if (!ships) {
         throw new Error(`Didn't find any ships on the server... uh oh. `);
       }
-      ships.forEach((ship) => addShiptoDb(ship));
+      ships.forEach((ship) => addShipToDb(ship));
       console.log(`Added ${ships.length} ships to the database`);
     })
     .catch((err) => console.log(err));

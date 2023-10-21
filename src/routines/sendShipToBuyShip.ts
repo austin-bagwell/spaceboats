@@ -1,4 +1,4 @@
-import { addShiptoDb } from "../db/fleet/addShipToDb";
+import { addShipToDb } from "../db/fleet/create";
 import { getShipFromDb } from "../db/fleet/getShipsFromDb";
 import { FleetApi, ShipType } from "@spacejunk/airlock";
 import { wait } from "../utils/wait";
@@ -39,7 +39,7 @@ export async function sendSendToBuyShip({
       waypointSymbol,
       shipType,
     });
-    addShiptoDb(ship);
+    addShipToDb(ship);
 
     return ship;
   }
@@ -81,7 +81,7 @@ export async function sendSendToBuyShip({
       shipType,
     });
 
-    addShiptoDb(ship);
+    addShipToDb(ship);
 
     return ship;
   }
