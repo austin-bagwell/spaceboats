@@ -32,11 +32,16 @@ export async function sendSendToBuyShip({
       await wait(cooldown);
     }
 
-    const purchasedShip = await fleet.purchaseShip({
-      waypointSymbol: currentLocation,
+    // once buying ship arrives, buy the new ship
+    const {
+      data: { ship },
+    } = await fleet.purchaseShip({
+      waypointSymbol,
       shipType,
     });
-    return purchasedShip;
+    addShiptoDb(ship);
+
+    return ship;
   }
 
   //   if ship is not at a either the designated waypointSymbol or the closest with a shipyard
@@ -69,15 +74,15 @@ export async function sendSendToBuyShip({
     await wait(navCooldown);
 
     // once buying ship arrives, buy the new ship
-    const purchasedShip = await fleet.purchaseShip({
+    const {
+      data: { ship },
+    } = await fleet.purchaseShip({
       waypointSymbol,
       shipType,
     });
 
-    // be sure to store the newly acquired ship
-    // but response from purchaseShip is different than plain ole ship I think
-    // addShiptoDb(purchasedShip);
+    addShiptoDb(ship);
 
-    return purchasedShip;
+    return ship;
   }
 }
