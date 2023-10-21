@@ -49,18 +49,20 @@ async function sellAllGoods(shipSymbol: string): Promise<MarketTransaction[]> {
     }
   }
 
-  //   TODO - this is probably bad?
-  await prisma.ship.update({
-    where: {
-      symbol: shipSymbol,
-    },
-    data: {
-      cargoCurrent: 0,
-    },
-  });
+  try {
+    await prisma.ship.update({
+      where: {
+        symbol: shipSymbol,
+      },
+      data: {
+        cargoCurrent: 0,
+      },
+    });
+  } catch (err: any) {
+    console.log(err);
+  }
 
   //   TODO - add sales records to db
-
   return saleRecord;
 }
 
