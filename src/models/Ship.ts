@@ -4,7 +4,7 @@ import {
   NavigateShip200Response,
   NavigateShipRequest,
   ShipFuel,
-} from "@spacejunk/airlock";
+} from "spacetraders-fetch-api";
 import { config } from "../utils/config";
 
 class BaseShip extends FleetApi {

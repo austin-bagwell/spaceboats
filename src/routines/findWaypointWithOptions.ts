@@ -3,7 +3,7 @@ import {
   Waypoint,
   WaypointType,
   WaypointTraitSymbolEnum,
-} from "@spacejunk/airlock";
+} from "spacetraders-fetch-api";
 import { config } from "../utils/config";
 
 const systems = new SystemsApi(config);

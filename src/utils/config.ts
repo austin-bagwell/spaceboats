@@ -1,4 +1,4 @@
-import { Configuration } from "@spacejunk/airlock";
+import { Configuration } from "spacetraders-fetch-api";
 const token = process.env.TOKEN;
 
 export const config = new Configuration({

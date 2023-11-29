@@ -6,8 +6,8 @@ import {
   SellCargoRequest,
   SellCargo201ResponseData,
   GetMyShips200Response,
-} from "@spacejunk/airlock";
-import { Ship } from "@spacejunk/airlock";
+} from "spacetraders-fetch-api";
+import { Ship } from "spacetraders-fetch-api";
 
 export const fleet = new FleetApi(config);
 

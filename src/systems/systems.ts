@@ -6,9 +6,9 @@ import {
   GetShipyardRequest,
   GetShipyard200Response,
   GetWaypointRequest,
-} from "@spacejunk/airlock";
+} from "spacetraders-fetch-api";
 
-import { Waypoint } from "@spacejunk/airlock";
+import { Waypoint } from "spacetraders-fetch-api";
 
 const systems = new SystemsApi(config);
 

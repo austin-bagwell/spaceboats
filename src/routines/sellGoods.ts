@@ -3,9 +3,9 @@ import {
   FleetApi,
   MarketTransaction,
   SellCargo201ResponseData,
-} from "@spacejunk/airlock";
+} from "spacetraders-fetch-api";
 import { config } from "../utils/config";
-import { SellCargoRequest } from "@spacejunk/airlock";
+import { SellCargoRequest } from "spacetraders-fetch-api";
 import { AssertionError } from "assert";
 
 const fleet = new FleetApi(config);

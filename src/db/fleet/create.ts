@@ -1,5 +1,5 @@
 import { prisma } from "../prismaClient";
-import { Ship } from "@spacejunk/airlock";
+import { Ship } from "spacetraders-fetch-api";
 
 async function addShipToDb(ship: Ship) {
   const {

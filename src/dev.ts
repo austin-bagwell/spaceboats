@@ -4,7 +4,7 @@ dotenv.config();
 import { startGame } from "./cli/startGame";
 import { findWaypointWithOptions } from "./routines/findWaypointWithOptions";
 import { sendSendToBuyShip } from "./routines/sendShipToBuyShip";
-import { getShipsFromDb } from "./db/fleet/getShipsFromDb";
+import { getShipsFromDb } from "./db/fleet/read";
 import { addStarterShipsToDb } from "./db/fleet/addStarterShipsToDb";
 import { getDelta } from "./utils/getDelta";
 

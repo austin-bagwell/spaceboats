@@ -1,6 +1,6 @@
 import * as readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
-import { GetMyShips200Response, Ship } from "@spacejunk/airlock";
+import { GetMyShips200Response, Ship } from "spacetraders-fetch-api";
 import { myShips } from "../fleet/ships";
 
 const rl = readline.createInterface({ input, output });

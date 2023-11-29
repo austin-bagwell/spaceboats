@@ -3,7 +3,7 @@ import {
   AgentsApi,
   GetMyAgent200Response,
   GetMyAgent200ResponseToJSON,
-} from "@spacejunk/airlock";
+} from "spacetraders-fetch-api";
 
 const agent = new AgentsApi(config);
 

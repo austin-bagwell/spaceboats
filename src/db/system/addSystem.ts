@@ -1,5 +1,5 @@
 import { prisma } from "../prismaClient";
-import { System } from "@spacejunk/airlock";
+import { System } from "spacetraders-fetch-api";
 
 async function addSystem(system: System) {
   const {
