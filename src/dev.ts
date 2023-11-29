@@ -68,6 +68,6 @@ Need to write a way to get a PuchaseShip201 ship into the database as a part of 
 //   .then((res) => console.log(res))
 //   .catch((err) => console.log(err));
 
-// getShipsFromDb()
-//   .then((res) => console.log(res))
-//   .catch((err) => console.log(err));
+getShipsFromDb()
+  .then((res) => console.log(res))
+  .catch((err) => console.log(err));
